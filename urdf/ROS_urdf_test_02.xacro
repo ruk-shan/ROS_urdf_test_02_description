@@ -1,0 +1,116 @@
+<?xml version="1.0" ?>
+<robot name="ROS_urdf_test_02" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find ROS_urdf_test_02_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find ROS_urdf_test_02_description)/urdf/ROS_urdf_test_02.trans" />
+
+<xacro:include filename="$(find ROS_urdf_test_02_description)/gazebo/ROS_urdf_test_02_materials.gazebo" />
+<xacro:include filename="$(find ROS_urdf_test_02_description)/gazebo/ROS_urdf_test_02_physics.gazebo" />
+<xacro:include filename="$(find ROS_urdf_test_02_description)/gazebo/ROS_urdf_test_02_plugins.gazebo" />
+
+<link name="base_link">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-0.03314741034777987 0.0 0.02459712434119629"/>
+    <mass value="49.24753665360008"/>
+    <inertia ixx="0.315493" ixy="0.0" ixz="0.003186" iyy="0.880649" iyz="-0.0" izz="1.174896"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Lwheel_1_1_1_1_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="1.912359159916832e-14 -0.015000000000000041 -6.938893903907228e-18"/>
+    <mass value="4.04854206026117"/>
+    <inertia ixx="0.006043" ixy="-0.0" ixz="0.0" iyy="0.011487" iyz="-0.0" izz="0.006043"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.195 -0.19 -0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/Lwheel_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.195 -0.19 -0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/Lwheel_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Rwheel_1_1_1_1_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-1.915134717478395e-14 0.015000000000000041 -1.3877787807814457e-17"/>
+    <mass value="4.048542060261174"/>
+    <inertia ixx="0.006043" ixy="0.0" ixz="-0.0" iyy="0.011487" iyz="-0.0" izz="0.006043"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="0.195 0.19 -0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/Rwheel_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0.195 0.19 -0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/Rwheel_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="caster_1_1_1_1_1">
+  <inertial>
+    <origin rpy="0 0 0" xyz="-6.759809081935408e-08 -1.6653345369377347e-18 0.0"/>
+    <mass value="0.5137812985558311"/>
+    <inertia ixx="0.000128" ixy="0.0" ixz="-0.0" iyy="0.000128" iyz="0.0" izz="0.000128"/>
+  </inertial>
+  <visual>
+    <origin rpy="0 0 0" xyz="-0.187834 -0.0 0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/caster_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="-0.187834 -0.0 0.025"/>
+    <geometry>
+      <mesh filename="package://ROS_urdf_test_02_description/meshes/caster_1_1_1_1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rev4" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.195 0.19 0.025"/>
+  <parent link="base_link"/>
+  <child link="Lwheel_1_1_1_1_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="Rev5" type="continuous">
+  <origin rpy="0 0 0" xyz="-0.195 -0.19 0.025"/>
+  <parent link="base_link"/>
+  <child link="Rwheel_1_1_1_1_1"/>
+  <axis xyz="0.0 -1.0 0.0"/>
+</joint>
+
+<joint name="Rev6" type="continuous">
+  <origin rpy="0 0 0" xyz="0.187834 0.0 -0.025"/>
+  <parent link="base_link"/>
+  <child link="caster_1_1_1_1_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+</robot>
